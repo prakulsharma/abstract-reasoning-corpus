@@ -1,0 +1,300 @@
+Filename	Reflections	Pixel/Object Changes	Helper Functions	Program Instructions
+beb8660c.png	This task involves sorting and rearranging colored tiles based on their length. The non-black tiles from the input are organized from longest to shortest and are stacked at the bottom right of the output grid.	"In each pair, the horizontal colored bars in the input are measured for length. In the output, these bars are then organized vertically in descending order by length, with the longest at the bottom and the shortest at the top, all positioned at the far right of the grid."	"get_pixel_coords: This function is utilized to identify the individual bars and their lengths in the input grid.
+sort: Although not a helper function provided in the list, a sorting algorithm is implied to arrange the bars based on length.
+fill_rect: This function is used to draw the bars on the output grid according to the sorted lengths."	"1. Use `get_pixel_coords` to create a dictionary of colored bars with their lengths from the input grid.
+2. Sort this dictionary in descending order of the bar lengths.
+3. Using the sorted order, draw each bar in the output grid, beginning at the bottom right corner and stacking the bars upwards.
+4. If the bars do not fill the entire grid's height, leave the remaining cells black."
+c0f76784.png	"This task focuses on identifying empty boxes of varying sizes within the input grid and filling them with specific colors based on their dimensions. The boxes are defined by light grey borders and are filled in the output grid with blue, orange, or magenta, depending on the size of the empty space."	"For each detected empty box in the input:
+3x3 empty spaces within 5x5 boxes are filled with blue pixels.
+2x2 empty spaces within 4x4 boxes are filled with orange pixels.
+1x1 empty spaces within 3x3 boxes are filled with magenta pixels.
+The objects of interest are the empty boxes, which are transformed by filling them with colored pixels. The transformation depends on the size of the box, with the color fill directly correlating to the size of the empty space inside the light grey borders."	"get_pixel_coords: Utilized to locate the coordinates of the light grey borders that define the empty boxes.
+fill_rect: Used to fill in the identified empty boxes with the appropriate colors in the output grid."	"1. Identify all distinct empty boxes in the input grid using the `get_pixel_coords` function, which are demarcated by light grey borders.
+2. Determine the size of each empty box.
+3. Based on the size, select the appropriate color (blue, orange, or magenta) to fill the box.
+4. Use the `fill_rect` function to fill in the empty boxes with the selected colors in the output grid."
+c1d99e64.png	"The task involves identifying lines of black pixels that span from one edge of the grid to the opposite edge, either horizontally or vertically, and filling these lines with red pixels to create the output."	"Black pixels that form a continuous line from one end of the grid to the other, without interruption, are changed to red pixels in the output.
+Lines, defined as uninterrupted sequences of black pixels that reach from one boundary of the grid to the opposite boundary, are the objects of interest that undergo a color change to red."	"get_pixel_coords: To locate all black pixels and their positions within the grid.
+fill_row and fill_col: Depending on whether the line is horizontal or vertical, these functions are used to fill the entire row or column with red color in the output grid."	"1. Use `get_pixel_coords` to identify the coordinates of all black pixels.
+2. Determine which set of black pixels forms a complete line across the grid.
+3. Use the `fill_row` or `fill_col` functions to change the color of these complete lines to red in the output grid."
+c3f564a4.png	The task involves filling in the black squares within a colorful patterned grid by extending the colors adjacent to these black squares.	The black squares in the input are transformed in the output by filling them with the color of the nearest non-black pixel from the top-right direction.	"get_pixel_coords: To find the coordinates of all black pixels.
+fill_value: To change the color of the black pixels to the color of the nearest colored pixel from the top-right direction."	"1. Use `get_pixel_coords` to locate all black pixels.
+2. For each black pixel, search in the top-right direction to find the nearest colored pixel.
+3. Use `fill_value` to fill each black pixel with the color of the identified nearest colored pixel."
+c8f0f002.png	"This task replaces orange pixels in the input with dark grey in the output, while maintaining the positioning of all other colored pixels."	The transformation includes changing orange pixels to dark grey while keeping the blue pixels and the position of the other colored pixels unchanged.	"get_pixel_coords: To locate all orange pixels on the grid.
+change_object_color: To change the color of the identified orange pixels to dark grey."	"1. Identify the coordinates of the orange pixels using the `get_pixel_coords` function.
+2. Change the color of the identified orange pixels to dark grey using the `change_object_color` function.
+3. Ensure all other pixels remain the same by not applying any changes to them."
+c9e6f938.png	"The task creates a mirrored version of the input grid and appending it to the right side of the original, effectively doubling the width of the grid."	"Each input grid is mirrored along its vertical axis and joined to the right, resulting in a grid that is twice as wide with a symmetrical pattern."	"horizontal_flip: To create a mirrored copy of the input grid.
+combine_object: To place the original and mirrored grids next to each other, effectively doubling the width of the original grid."	"1. Use the `horizontal_flip` function to create a horizontally mirrored copy of the input grid.
+2. Combine the original grid with the flipped grid side by side to create the output grid."
+c9f8e694.png	The task involves a color transformation process where each grey pixel in the input image is replaced with the color of the leftmost pixel in the same row.	"In the input, grey pixels appear in rows with colored pixels on the left side. In the output, these grey pixels are replaced by the color of the leftmost non-grey pixel in the same row, creating a horizontal gradient effect."	"get_pixel_coords: To find the coordinates of the non-grey pixels.
+replace: To replace the grey pixels with the identified color in each row."	"1. Identify the leftmost non-grey pixel in each row of the grid.
+2. Replace all grey pixels in that row with the identified color."
+c59eb873.png	"The task uniformly scales up the input grid by a factor of two,"	Each pixel in the input represented by four identical pixels in the output when they are transformed into a 2x2 block of the same color in the output grid.	enlarge_grid: This function is used to replicate each pixel in the input grid to create a larger block of the same color pixels in the output grid.	1. enlarge_grid the entire grid by a factor of 2
+c444b776.png	"The task replicates colored pixels from one section of a grid into all the other black sections, separated by yellow lines, maintaining the same position relative to each section."	"The grid is divided into equal parts by yellow lines. In the input, only one quadrant contains colored pixels. These colored pixels are copied into the corresponding positions in the other parts. The position of the pixels is maintained in a way that each parts mirrors the colored one."	"get_pixel_coords: To map the coordinates and colors of the pixels in the populated quadrant.
+replace: To merge the replicated pixel pattern onto the grid while preserving the yellow lines."	"1. Determine the dimensions of each quadrant by analyzing the position of the yellow lines within the grid.
+2. Identify which quadrant contains the colored pixels.
+3. Use `get_pixel_coords` to obtain the coordinates and colors of the pixels in the populated quadrant.
+4. Use `replace` to replicate the colored pixels at the corresponding positions in the other quadrants, ensuring the relative position is maintained."
+c909285e.png	The task involves locating a grid with a uniquely colored contour that does not appear elsewhere in the input and cropping the input to the edges of that contour to produce the output.	Each input grid has one uniquely colored contour that does not repeat in other parts of the grid. The task is to identify this unique contour by its color and then crop the grid to include only the area within this contour. The output is the cropped section with the uniquely colored contour forming the boundary.	"get_pixel_coords: To get a mapping of colors and their coordinates.
+crop_grid: To crop the input grid according to the bounding coordinates of the unique contour."	"1. Use `get_pixel_coords` to get a mapping of all colors and their coordinates in the grid.
+2. Identify the color that forms a closed contour and does not appear anywhere else in the input grid.
+3. Use this color to determine the bounding coordinates of the unique contour.
+4. Use `crop_grid` to crop the input grid to the identified bounding coordinates.
+5. The cropped grid becomes the output, retaining the unique contour as the boundary."
+caa06a1f.png	"The task involves identifying the pixels that form a solid-colored pattern and removing this pattern to reveal a multicolor weaving pattern beneath it, which constitutes the output."	"The input grids contain a multicolor checkered pattern overlaid by a solid-colored pattern. The solid-colored pattern covers part of the grid uniformly. The output is obtained by removing this homogeneous solid-colored pattern, revealing the underlying multicolor pattern that creates a checkerboard effect."	"get_pixel_coords: To map pixel colors and their coordinates, which helps in identifying the solid-colored pattern."	"1. Use `get_pixel_coords` to map the coordinates of each pixel color in the grid.
+2. Identify the solid-colored pattern by finding the color that forms a block without alternating colors.
+3. Remove the identified solid-colored pattern to reveal the multicolor weaving pattern underneath.
+4. The revealed multicolor pattern is the output, which should retain the checkered arrangement without the solid color overlay."
+cbded52d.png	"The task requires identifying pairs of colored pixels (not black or blue) that are aligned either horizontally or vertically on the grid. Once identified, the middle position(s) between these pairs on the same row or column should be filled with the same color as the pair."	"In each input grid, there are pairs of non-black and non-blue pixels that are on the same row or column with empty spaces between them. The output grid is obtained by filling in the empty spaces between these pairs with the color of the pair. This task does not alter the position of any pixels, only fills in the gaps between colored pairs."	"get_pixel_coords: To obtain the coordinates of each colored pixel in the grid.
+fill_value: To fill the middle positions between pairs with the correct color."	"1. Create a function that scans each row and column for pairs of non-black and non-blue pixels.
+2. Use `get_pixel_coords` to map the coordinates of each color.
+3. For each color that is not black or blue, find pairs that are on the same row or column.
+4. Calculate the middle positions between these pairs.
+5. Fill the calculated middle positions with the color of the pairs using `fill_value`.
+6. Repeat the process for each pair found in step 3 and for both rows and columns.
+7. The final output should show the original grid with the middle positions between pairs filled with the corresponding color."
+cdecee7f.png	The task transforms a scattered grid of colored pixels into a compact 3x3 grid following a specific order.	"Colored pixels in the input grid are detected and sequentially placed into a new 3x3 grid. The placement follows a pattern: starting from the top-left corner, moving horizontally to the right, then snaking down and to the left, and finally snaking to the right. This creates a unique arrangement where the 1st to the 9th colored pixel encountered are placed in positions 1-2-3-6-5-4-7-8-9 of the 3x3 grid, respectively."	"get_pixel_coords: Maps pixel values to their coordinates and filters out black pixels.
+empty_grid: Generates the 3x3 grid that will hold the reordered pixels.
+fill_value: Inserts colored pixels into the 3x3 grid at the positions specified by the snaking pattern."	"1. Use `get_pixel_coords` to obtain a list of coordinates for all non-black pixels in the input grid.
+2. Create an `empty_grid` of 3x3 size for the output.
+3. Define the snaking pattern as a sequence of indices `[0, 1, 2, 5, 4, 3, 6, 7, 8]`, corresponding to the desired positions in the 3x3 grid.
+4. Iterate through the list of non-black pixel coordinates, and for the first nine pixels, place each pixel in the `empty_grid` at the position according to the snaking pattern.
+5. If there are fewer than nine colored pixels, leave the remaining positions in the 3x3 grid black.
+6. Use `fill_value` to place the pixels in the correct positions within the 3x3 grid.
+7. The output is the filled 3x3 grid with the colored pixels in the snaking pattern."
+ce4f8723.png	"The task combines two halves of a grid, divided by a yellow line, into a single grid where only the overlapping black pixels remain black, and all other pixels are turned green."	"The input grid is divided into two halves by a yellow line. Each half contains black and various colored pixels. In the output grid, the two halves are overlaid. Where a pixel is black in both halves, it remains black in the output. For all other pixels—those that are colored in either half—the resulting pixel is green in the output."	"get_pixel_coords: To identify the coordinates of black pixels in both halves of the input grid.
+empty_grid: To create a grid that will be filled with the output pattern.
+fill_value: To set the color of individual cells in the output grid."	"1. Use `get_pixel_coords` to obtain coordinates for all black pixels in both halves of the input grid.
+2. Create an `empty_grid` of the same size as one half of the input grid (excluding the yellow dividing line).
+3. For each cell in the `empty_grid`, check if the corresponding cell in both halves of the input grid is black.
+   - If yes, use `fill_value` to set that cell to black in the output grid.
+   - If no, set that cell to green in the output grid.
+4. The resulting grid should have black pixels only where both halves had black pixels, and green pixels everywhere else."
+ce9e57f2.png	"The task involves transforming red vertical bars in the input grid such that the bottom half of each bar is turned grey, and if a bar has an odd number of red pixels, the central pixel remains red."	"Each red vertical bar in the input grid is processed to change its color. If the bar's height is an even number of pixels, the bottom half is converted to grey. If the bar's height is odd, the pixel in the middle remains red, and the rest of the bottom half is turned grey. All other pixels in the grid remain unchanged."	"get_pixel_coords: To find the coordinates of all red pixels in the input grid.
+fill_value: To change the color of specific pixels in the output grid to grey while keeping the central pixel of an odd-height bar red."	"1. Use `get_pixel_coords` to obtain the coordinates of all red pixels.
+2. Determine the height of each vertical red bar and identify the middle of the bar.
+3. Create a copy of the input grid to serve as the output grid.
+4. For each red bar:
+   - If the bar's height is even, use `fill_value` to change the color of the bottom half of the bar to grey.
+   - If the bar's height is odd, use `fill_value` to change the color of the pixels below and above the central red pixel to grey, leaving the middle pixel red.
+5. The final grid, with grey and red bars as specified, is the output."
+ce22a75a.png	"The task involves converting each grey pixel in the input grid into a blue pixel and also changing the eight surrounding pixels to blue, essentially creating a 3x3 blue square centered on each grey pixel."	"In the input grid, there are grey pixels scattered throughout a black background. For the output, each grey pixel and its adjacent pixels (including diagonals, which makes up to eight surrounding pixels) are changed to blue. If the grey pixel is near the edge of the grid, the transformation still occurs but only within the bounds of the grid, possibly resulting in smaller blue areas."	"get_pixel_coords: To map the grey pixel values to their coordinates.
+fill_value: To change the color of the grey pixel and its surrounding pixels to blue."	"1. Use `get_pixel_coords` to identify the coordinates of all grey pixels in the input grid.
+2. Iterate over each grey pixel's coordinates and for each, identify the coordinates of the eight surrounding pixels (up, down, left, right, and all four diagonals).
+3. Use `fill_value` to change the color of the grey pixel and its surrounding pixels to blue. Ensure that the changes respect the boundaries of the grid to avoid indexing errors.
+4. If a grey pixel is adjacent to another grey pixel, their blue areas will overlap; this is expected and should not be prevented.
+5. The output is the modified grid with blue 3x3 squares where each grey pixel was located in the input grid."
+cf98881b.png	"The task involves creating a composite grid from three separate grids, where the color of pixels in the first grid is modified based on the color of the corresponding pixels in the second and third grids, using red lines as dividers."	"The input grid is divided into three sections by red lines. The pixels from the first section are checked against the corresponding pixels in the second and third sections. If a black pixel from the first section corresponds to a pink pixel in the second section, it changes to pink in the output. Similarly, if a black (not yet turned pink) pixel in the resulting grid corresponds to a blue pixel in the third section, it changes to blue in the output."	"get_pixel_coords: Not necessary if we iterate through each grid by position.
+replace: To change the color of pixels in the new grid based on the color of corresponding pixels in the second and third grids.
+change_object_color: Changes the color of an object to a specified value."	"1. Separate the input grid into three smaller grids based on the red lines.
+2. Create a new grid with the same dimensions as one of the smaller grids to store the output, copy the left-most smaller grid to the new grid.
+3. For each black pixel in the first grid:
+   - Check the corresponding pixel in the second grid. If it's pink, change the color in the new grid to pink.
+   - Then, check the corresponding pixel in the third grid. If it's blue, change the color in the new grid to blue.
+4. The new grid now reflects the composite of all three grids following the color priority rules: black can change to pink or blue, and pink can change to blue.
+5. This resulting grid is the output."
+d0f5fe59.png	The task entails counting the number of distinct colored shapes in the input grid and creating an output grid that is a square with its size determined by the number of these shapes. The output grid has a diagonal line from the top-left to the bottom-right filled with light blue pixels.	"The input grid contains various colored shapes on a black background. Each distinct shape is counted, and this count determines the size of the output grid. The output grid is square, with the number of cells on each side equal to the count of colored shapes in the input. A diagonal line from the top-left corner to the bottom-right corner of the output grid is filled with light blue pixels, and all other pixels remain black."	"get_pixel_coords: To identify and count the distinct colored shapes in the input grid.
+empty_grid: To create a new square grid based on the number of colored shapes.
+fill_value: To fill the diagonal pixels with light blue color in the output grid."	"1. Use `get_pixel_coords` to find all non-black pixels in the input grid and group them by connected components to count the number of distinct colored shapes.
+2. Determine the size of the output grid: the number of shapes will be the length of each side of the square output grid.
+3. Use `empty_grid` to create a square grid of the determined size.
+4. Fill the diagonal from the top-left to the bottom-right with light blue pixels using `fill_value`.
+5. All other pixels in the output grid should remain black, which is the default color in the `empty_grid`."
+d2abd087.png	"The task requires identifying distinct grey shapes in the input grid, calculating their sizes, pairing shapes that together sum to 12 pixels, coloring those paired shapes red, and coloring all remaining grey shapes blue."	"Each grey shape in the input grid represents a connected set of grey pixels. These shapes are identified and their sizes are calculated. Two shapes whose sizes add up to 12 pixels are then identified, and these specific shapes are colored red in the output. All other grey shapes are colored blue in the output. A shape is defined as a group of connected pixels (horizontally and vertically, but not diagonally)."	"get_pixel_coords: Can be used to get the coordinates of all grey pixels, but a custom function to group them into distinct shapes would be needed.
+fill_value: To change the colors of the pixels in the identified shapes to red or blue in the output grid."	"1. Identify all distinct grey shapes in the input grid. A distinct shape is a set of connected grey pixels.
+2. Calculate the size (the number of pixels) of each grey shape.
+3. Find pairs of shapes whose combined size equals 12 pixels and mark them for coloring red.
+4. Use `fill_value` to change the color of pixels in shapes marked red to red.
+5. Use `fill_value` to change the color of pixels in all other grey shapes to blue.
+6. Ensure that each grey pixel is colored exactly once to avoid overlaps in coloring."
+d4a91cb9.png	"The task is to draw a yellow path between a grey pixel and a red pixel such that the path consists of horizontal and vertical lines connecting the two pixels, using the grey pixel's x-coordinate and the red pixel's y-coordinate as turning points."	"In the input grid, there are individual grey and red pixels. The output grid features a yellow path starting from the grey pixel, moving horizontally to align with the red pixel's y-coordinate, and then vertically to reach the red pixel. The path changes direction at the pixel with the grey's x-coordinate and the red's y-coordinate."	"empty_grid: To initialize an output grid of the same size as the input grid.
+fill_value: To change the color of the pixels along the path to yellow."	"1. Identify the coordinates of the grey and red pixels.
+2. Create an empty grid of the same size as the input grid using `empty_grid`.
+3. Identify the pivot pixel, which has the grey pixel's x-coordinate and the red pixel's y-coordinate.
+4. Use `fill_value` to color the path from the grey pixel to the pivot pixel, and from the pivot pixel to the red pixel, yellow.
+5. Ensure the path is continuous and does not overlap itself."
+d4f3cd78.png	"The task requires filling a hollow grey square with light blue pixels, and extending a line in light blue pixels from the open end of the square to the edge of the grid in the direction of the opening."	"The input grid features a hollow square made up of grey pixels with one side having an opening. The output involves filling the inner area of this square with light blue pixels. Additionally, from the opening of the grey square, a continuous straight line of light blue pixels is drawn to the nearest edge of the grid."	fill_value: To change the color of the pixels inside the hollow square and to draw the line extending from the opening.	"1. Identify the coordinates of the grey pixels forming the square.
+2. Locate the opening in the square by finding where the continuous line of grey pixels is interrupted.
+3. Fill the inside of the hollow grey square with light blue pixels.
+4. Use the location of the opening to draw a straight line of light blue pixels from the opening to the edge of the grid in the direction it opens, up till the grid's boundaries."
+d5d6de2d.png	The task transforms hollow red boxes in the input grid into filled green boxes with black borders in the output grid.	"In the input, hollow red boxes are identified by their red borders. In the output, the inside of these boxes is filled with green pixels, and the red border pixels are turned black. The size and position of the boxes remain unchanged."	"get_pixel_coords: Not necessary if we identify box borders through direct iteration.
+empty_grid: To initialize an empty output grid matching the input grid size.
+fill_rect: To fill the interior of the detected hollow red boxes with green.
+fill_value: To change the red border pixels to black."	"1. Identify the red borders of the hollow boxes and their coordinates using a method of detecting connected red pixels that form a square or rectangular shape.
+2. Create an `empty_grid` with the same dimensions as the input grid.
+3. For each detected red border, fill the interior area with green pixels using the `fill_rect` function, ensuring the interior coordinates are correctly identified.
+4. Change the red border pixels to black using the `fill_value` function on the detected border coordinates.
+5. The final output will show green-filled boxes with black borders, where the original red boxes were in the input."
+d06dbe63.png	"The transformation process consists of creating a pattern that extends from an initial light blue pixel in two opposite directions, each direction in a ""staircase"" fashion: up and right, and down and left. Each ""stair"" consists of two pixels added in one direction and then two pixels in the perpendicular direction."	"The input features a single light blue pixel. From this pixel, the output extends a snake-like pattern that alternates directions. Each segment of the snake is two pixels long, creating an alternating pattern of vertical and horizontal pairs of pixels extending from the initial light blue pixel."	"get_pixel_coords: To find the initial light blue pixel's location.
+fill_value: To color the pixels in the pattern based on the current direction of the path."	"1. Locate the light blue pixel in the input grid using `get_pixel_coords`.
+2. Starting from the light blue pixel, apply the following pattern:
+   - Add two pixels above the current pixel, then two pixels to the right of the last added pixel.
+   - From the initial light blue pixel, add two pixels below, then two pixels to the left of the last added pixel.
+   - Repeat this pattern, alternating between vertical and horizontal additions, until the edges of the grid are reached.
+3. Use `fill_value` to color the new pixels in the path formation.
+4. Create a recursive or iterative function that applies these steps, handling grid boundaries to prevent out-of-bounds errors."
+d8c310e9.png	The transformation replicates the patterns of initial column found starting from the left edge across the entire grid to the right.	Each input grid features a series of colored columns with a specific pattern starting from the left edge. The corresponding output completes these patterns by repeating them across the entire width of the grid. The patterns are replicated as many times as necessary to fill the grid from left to right.	"get_pixel_coords: To map the initial column pattern's pixel colors to their coordinates.
+fill_value: To color the pixels according to the repeating pattern."	"1. Use `get_pixel_coords` to obtain the color and coordinates of each pixel in the leftmost columns that contain the starting pattern.
+2. Determine the width of the repeating pattern (the number of columns involved) in the leftmost part of the grid.
+3. Repeat the identified pattern across the entire width of the grid, using `fill_value` to color each pixel according to the pattern.
+5. Ensure that the pattern wraps around correctly, starting from the first color of the pattern when the right edge of the grid is reached and the pattern is incomplete."
+d9f24cd1.png	"The transformation involves drawing vertical red lines from the red pixels upward until the top of the grid or until a grey pixel is encountered. When a grey pixel is encountered, the red line shifts one pixel to the right and continues upward from that new position, circumventing the grey pixel. This creates a continuous vertical red path that deviates to avoid any grey pixels."	"For each red pixel in the input grid, a vertical line is drawn upward. This line continues uninterrupted unless a grey pixel is encountered. Upon encountering a grey pixel, the line detours to the right by one pixel and then continues upward from this new position. This transformation creates a stepped pattern of red lines that navigate around any obstacles represented by grey pixels."	"get_pixel_coords: To find the starting red pixels and the position of obstacles (grey pixels).
+fill_value: To draw the vertical red lines in the output grid.
+tight_fit: To clean up the final grid by removing any blank rows or columns."	"1. Use `get_pixel_coords` to map each red and grey pixel to their coordinates.
+2. For each red pixel at coordinate (x, y):
+   - Draw a line upward (decrease the y-coordinate) until the top of the grid is reached or a grey pixel is encountered.
+   - If a grey pixel is encountered, move right (increase the x-coordinate by 1) and continue the line upward from the pixel below the grey one.
+   - Use `fill_value` to color these lines red in the output grid.
+3. After completing the vertical lines, use `tight_fit` to remove any unnecessary blank rows or columns, if applicable."
+d9fac9be.png	The task extracts a single colored pixel that is at the center of a 3x3 square of identically colored pixels.	"In each input grid, colored pixels form various shapes and patterns. The output consists of a single pixel whose color matches the central pixel of a 3x3 homogeneous block in the input."	"get_pixel_coords: To get the coordinates of pixels based on their colors.
+crop_grid: It might be used if we need to analyze each 3x3 block individually.
+empty_grid: To initialize a new grid if we are not overwriting the input grid.
+fill_value: To fill the identified pixel in the output grid."	"1. Traverse the input grid using a 3x3 window to find a center pixel that is surrounded by 8 pixels of the same color.
+2. Once the 3x3 block with identical surrounding pixels is found, store the coordinates and the color of the central pixel.
+3. Use the `get_pixel_coords` function to find all pixels of the specified color in the grid.
+4. Use `crop_grid` to crop around the 3x3 block if needed.
+5. Initialize a new grid with `empty_grid` if creating a new output, or clear the input grid for the output.
+6. Use `fill_value` to place the identified central pixel in the new or cleared grid at the corresponding position."
+d10ecb37.png	"The task involves cropping the input grid to obtain a top-left corner section as the output, maintaining the original colors and structure."	"Each input image is a grid with distinctly colored blocks, which are reduced to a smaller grid in the output. The top-left block of each input is preserved, while the rest of the grid is discarded."	crop_grid: This function will be the primary one used to crop the input grid to match the output.	- Use `crop_grid` to extract the top-left section of the input grid. The size of the cropped section can be determined by observing the size of the output in the training examples.
+d13f3404.png	The transformation involves duplicating each colored pixel diagonally to create an extended pattern from the top-left towards the bottom-right corner of the grid.	"In each pair of images, the input grid contains individual colored pixels or a small group of adjacent pixels of the same color. In the corresponding output, these colored pixels are replicated in a diagonal pattern toward the bottom right. This creates a larger block of the same color pixels that retains the original color placement relative to other colors but in an expanded form."	"get_pixel_coords: To locate the original colored pixels within the grid.
+fill_value: To fill in the new pixel positions as part of the replication pattern."	"1. Identify the coordinates of each colored pixel in the input grid using the `get_pixel_coords` function.
+2. For each colored pixel found, create a diagonal replication starting from the pixel's coordinates and extending to the bottom-right of the grid. The replication process may involve a loop that increments both the x and y coordinates until the edge of the grid is reached or a specific pattern size is met.
+3. The `fill_value` function can be used to place the colored pixels at the newly calculated coordinates for the replication."
+d23f8c26.png	"The task involves converting all pixels except for the middle column to black, preserving the original colors only in the central column of the grid."	The transformation preserves the colors of the central vertical column of pixels while changing all other pixels in the grid to black. This effectively reduces the input pattern to a single column of color information.	"get_pixel_coords: To locate the original colored pixels within the grid.
+fill_value: To fill in the new pixel positions as part of the replication pattern."	"- Utilize the `get_pixel_coords` function to identify the coordinates of all non-black pixels.
+- Determine the central column of the grid based on the width of the grid.
+- For each pixel coordinate, check if it belongs to the central column.
+  - If it is not in the central column, use the `fill_value` function to change the pixel color to black.
+  - If it is in the central column, leave the pixel as is."
+d037b0a7.png	The transformation applies a vertical replication of colored pixels from the top row to the bottom. Each pixel's color in the top row is extended downward to form a column of the same color until it either reaches the bottom of the grid.	"For each input grid, the transformation selects colored pixels from the top row. These pixels are then replicated downward to fill the column below them. This process repeats for each colored pixel in the top row. The output grid displays columns of color matching the sequence of colored pixels from the top row of the input."	"get_pixel_coords: To identify the pixels in the top row that need to be replicated downward.
+fill_col: To fill each column downward from the colored pixels found in the top row."	"1. Use `get_pixel_coords` to retrieve the coordinates of the pixels in the top row.
+2. Iterate over each pixel in the top row.
+3. For each pixel, if it is colored (not black), draw a vertical line downward from that pixel's position using the `fill_col` function. This line should extend to the bottom of the grid or until it meets another colored pixel from the top row, whichever comes first.
+4. Once all colored pixels have been extended downward, the resulting grid is the output."
+d43fd935.png	"The task transforms an input grid by drawing vertical or horizontal lines connecting isolated colored pixels to the main 2x2 block of the same color, provided they share an x or y coordinate with any pixel of the block."	"For each input-output pair, the process locates a 2x2 block of a solid color and identifies any stray pixels of the same color that lie on the same row or column as the block. These stray pixels are then connected to the block by drawing a continuous line of the same color towards the block, stopping either at the block or just before it if another colored pixel is encountered."	"get_pixel_coords: To identify the pixels in the top row that need to be replicated downward.
+fill_col: To fill each column downward from the colored pixels found in the top row."	"1. Locate the 2x2 block within the grid.
+2. For each colored pixel not in the block, check if it shares an x or y coordinate with any of the block's pixels.
+3. If it does, draw a line from that pixel to the edge of the block in the pixel's color.
+4. Ensure that the line does not overwrite any other colored pixels."
+d89b689b.png	"Identify the 2x2 block, take the colored pixel that is upper-right to it and place it over the upper-right pixel of the block, making its original position black; repeat for upper-left, lower-right, lower-left as well"	"In each input, colored pixels are identified in cardinal positions relative to a 2x2 block of different or same color pixels. The transformation requires each colored pixel to be moved to the closest corner of the 2x2 block. The pixel that was originally in the corner position where the colored pixel moves to turns black. The process is repeated for each colored pixel found in the cardinal directions around the 2x2 block. This results in the colored pixels being in the corners of the 2x2 block in the output, and their original positions becoming black."	"get_pixel_coords: Used to find the coordinates of the colored pixels and the 2x2 block within the grid.
+fill_value: Employed to change the original position of the moved pixel to black."	"- Use `get_pixel_coords` to identify the location of the colored pixels and the 2x2 block.
+- Locate the specific colored pixels that are cardinal (N, S, E, W) to the 2x2 block.
+- For each identified colored pixel, calculate the new position based on the target corner of the 2x2 block.
+- Move the colored pixel to the new position, and change the pixel's original position to black.
+- Return the modified grid as the final output."
+d364b489.png	"The task involves adding a set of red, beige, magenta, and grey pixels around each blue pixel to its top, left, right, and bottom."	"For each blue pixel present in the input grid, four new pixels are added in cardinal directions: red above, beige to the left, magenta to the right, and grey below the blue pixel. The blue pixel retains its original position, and the added pixels occupy the immediately adjacent cells, assuming they fall within the grid boundaries."	"get_pixel_coords: Used to find the coordinates of the colored pixels and the 2x2 block within the grid.
+fill_value: Employed to change the original position of the moved pixel to black."	"- Use `get_pixel_coords` to locate all blue pixels on the grid.
+- For each blue pixel found, add the specified colors around it as follows:
+  - Add a red pixel above the blue pixel.
+  - Add a beige pixel to the left of the blue pixel.
+  - Add a magenta pixel to the right of the blue pixel.
+  - Add a grey pixel below the blue pixel.
+- Ensure that the addition of new pixels does not exceed the grid boundaries.
+- Return the modified grid as the final output."
+d511f180.png	The transformation task switches the color of the light grey and dark grey pixels while leaving all other pixels unchanged.	"In each input grid, there are pixels with two shades of grey: light grey and dark grey. The output grid is a copy of the input grid with the color of these grey pixels switched; each light grey pixel in the input becomes dark grey in the output, and vice versa. All other colored pixels remain the same without any positional or color changes."	"get_pixel_coords: Used to find the coordinates of light grey and dark grey pixels within the grid.
+change_object_color: Used to switch the color of the grey pixels in their respective positions."	"1. Identify all light grey and dark grey pixels using the `get_pixel_coords` function.
+2. Iterate over the identified pixels and switch their colors:
+   - Change light grey pixels to dark grey.
+   - Change dark grey pixels to light grey.
+3. Ensure that all other pixels retain their original color and position.
+4. Return the modified grid as the final output."
+d631b094.png	The task transforms a grid with a block of colored pixels into a single row of pixels of the same color with the length equal to the number of colored pixels in the block.	"Each input contains a square block of colored pixels. The output transforms this block into a horizontal line of pixels. The number of pixels in the line is equal to the count of colored pixels in the input block, and the color of the line matches the color of the input block."	"get_pixel_coords: To count the number of colored pixels and determine their color.
+empty_grid: To create a new grid of the appropriate dimensions.
+fill_row: To fill the row in the new grid with the specified number of colored pixels."	"1. Use `get_pixel_coords` to identify the coordinates and count of the colored pixels in the input.
+2. Create a new grid using `empty_grid` with the dimensions 1 row by N columns, where N is the number of colored pixels identified.
+3. Use `fill_row` to fill the single row with the color of the input block.
+4. Return the new grid as the final output."
+d4469b4b.png	The task involves filling a 3x3 grid with grey pixels in specific patterns based on the color of non-black pixels in the input.	"For each input grid, non-black colored pixels (red, blue, or green) determine the placement of grey pixels in a new 3x3 grid. Red pixels correspond to a 'T' shape, blue to a '+' shape, and green to a mirrored 'L' shape within this 3x3 grid. The output grid thus transforms the color information of the input into a spatial pattern of grey pixels."	"empty_grid
+get_pixel_coords: To find the coordinates and colors of the non-black pixels.
+fill_value: To fill specific positions in the 3x3 grid with grey pixels."	"1. Create a 3x3 empty grid using `empty_grid`.
+2. Use `get_pixel_coords` to identify non-black colored pixels in the input grid.
+3. For each non-black colored pixel, fill the corresponding grey pixels in the new grid:
+   - If the pixel is red, fill the 'T' shape with grey.
+   - If the pixel is blue, fill the '+' shape with grey.
+   - If the pixel is green, fill the mirrored 'L' shape with grey.
+4. Return the 3x3 grid with the filled grey shapes as the final output."
+d90796e8.png	"The task modifies the grid by changing the color of touching red and green pixel pairs, turning the green pixel to grey and the red pixel to black."	"Each input grid contains red and green pixels that are adjacent to each other. When a red pixel is found next to a green pixel (in any of the four cardinal directions), the transformation rules are applied: the green pixel changes to grey, and the red pixel changes to black. All other pixels remain unaffected."	"get_pixel_coords: To get the coordinates of the red and green pixels.
+change_object_color: To change the color of the red pixel to black and the green pixel to grey."	"1. Use `get_pixel_coords` to identify the positions of all red and green pixels in the grid.
+2. Iterate through the positions of red pixels to check if any green pixels are adjacent (above, below, left, or right).
+3. For each adjacent pair found:
+   - Change the color of the green pixel to grey.
+   - Change the color of the red pixel to black.
+4. Ensure that all other pixels retain their original color and position.
+5. Return the modified grid as the final output."
+d406998b.png	The task involves recoloring grey in alternating columns into green.	"In each input grid, which is structured like a checkerboard with black and grey squares, the transformation process involves changing the color of grey squares in every other column, counting from the rightmost column to the left. Specifically, starting with the rightmost column as the first, every second column's grey squares are changed to green. Black squares and grey squares in the remaining columns remain unchanged."	"get_pixel_coords: To locate the grey pixels on the grid.
+change_object_color: To change the identified grey pixels to green in the specified columns."	"1. Use `get_pixel_coords` to find the coordinates of all grey pixels.
+2. Determine which columns to alter by calculating the modulus of the x-coordinate of each grey pixel. If the x-coordinate is even (considering a zero-based index), change the color of the pixel to green.
+3. Apply the color change only to the selected columns' grey pixels.
+4. Return the modified grid as the final output."
+dae9d2b5.png	"The transformation involves changing the color of all non-black pixels to magenta and then cutting the grid in half, overlaying one side over the other, preserving the magenta pixels over black when they overlap."	"In each input grid, colored pixels (yellow and green) are changed to magenta. The input grid is then divided into two halves, left and right. The right half is placed over the left half such that if there is a magenta pixel in the right half where it overlays a black pixel in the left half, the magenta pixel is preserved. If there is a magenta pixel on both sides, the top (right half's) pixel is preserved."	"get_pixel_coords: To locate non-black pixels in the grid.
+change_object_color: To change the color of non-black pixels to magenta.
+crop_grid: Used twice to divide the grid into two halves.
+combine_object: To overlay the right half over the left half, preserving the magenta pixels over black."	"1. Use `get_pixel_coords` to find the coordinates of all non-black pixels.
+2. Change the color of these pixels to magenta using `change_object_color`.
+3. Cut the grid in half to create two equal sections.
+4. Overlay the right section over the left section. Where a magenta pixel from the right section overlays a black pixel from the left section, keep the magenta pixel.
+5. Return the combined half grid as the final output."
+db3e9e38.png	"The transformation involves adding alternating columns of blue and beige pixels to both sides of an existing beige column in the input, with each successive column being one pixel shorter than the previous one, aligned at the top of the grid."	"Each input grid contains a central beige column. The output grid is constructed by adding alternating columns of blue and beige to both the left and right of this central column. Each new column is one pixel shorter than the previous one and starts at the top of the grid, creating a step-like pattern on both sides. The original beige column remains in place."	"get_pixel_coords: To identify the beige column.
+fill_col: To add the new columns on both sides of the beige column.
+A loop or recursive approach to decrease the height of each subsequent column by one pixel."	"1. Use `get_pixel_coords` to find the column(s) with beige pixels.
+2. Starting from the identified beige column, alternately add blue and beige columns to the left and right. Each added column should be one pixel shorter than the previous column and start at the top of the grid.
+3. Ensure the added columns are aligned correctly, creating the step pattern as seen in the training examples.
+4. Return the modified grid as the final output."
+dbc1a6ce.png	"The task requires drawing straight horizontal or vertical lines to connect colored pixels, only if they can be connected directly in one of these two manners."	"In each input, isolated blue pixels are connected by light blue lines if they are aligned horizontally or vertically. No diagonal or broken lines are drawn; only uninterrupted straight lines between two blue pixels are considered. After the connection, the resulting image shows continuous lines of light blue pixels connecting the original blue pixels, either horizontally or vertically."	"get_pixel_coords: To locate the blue pixels in the grid.
+fill_between_coords: To draw light blue lines between the blue pixels that can be connected directly horizontally or vertically."	"1. Use `get_pixel_coords` to find the coordinates of all blue pixels.
+2. Iterate over the list of blue pixel coordinates, and for each pair of blue pixels that can be connected by a straight line without any interruptions, draw a line:
+   - Check if pixels are on the same row (for a horizontal line) or the same column (for a vertical line).
+   - Verify that there are no other colors or obstacles between the pixels.
+   - If conditions are met, draw a light blue line between them.
+3. Return the grid with the newly drawn lines as the final output."
+dc1df850.png	"The task involves encircling each red pixel with eight blue pixels, forming a blue perimeter around each red pixel."	"The transformation consists of locating each red pixel in the input grid and adding blue pixels around it in all eight possible directions (above, below, left, right, and diagonally in all four corners), ensuring the red pixel is centrally surrounded by these blue pixels. If multiple red pixels are adjacent, the blue pixels are shared between the perimeters of these red pixels."	"get_pixel_coords: To get the coordinates of red pixels.
+fill_value: To place blue pixels around each red pixel."	"1. Use `get_pixel_coords` to identify the coordinates of all red pixels in the grid.
+2. For each red pixel identified, add blue pixels in all eight positions around it (one on each side and one on each diagonal).
+3. If a blue pixel would overlap with an existing red pixel, it should not be placed.
+4. Return the modified grid with red pixels surrounded by blue."
+dc433765.png	"The transformation task is to move the green pixel one step closer to the yellow pixel, potentially in a diagonal direction, as indicated by the training examples."	"Each input grid contains one green pixel and one yellow pixel. The transformation involves shifting the green pixel by one position in the direction of the yellow pixel. If the yellow pixel is diagonally positioned from the green pixel, the green pixel moves diagonally, reducing the distance between them by one step."	"get_pixel_coords: To find the coordinates of the green and yellow pixels.
+fill_value: To place the green pixel in its new position closer to the yellow pixel."	"1. Use `get_pixel_coords` to locate the green and yellow pixels.
+2. Determine the direction from the green pixel to the yellow pixel.
+3. Move the green pixel one step closer to the yellow pixel in the determined direction. This step could be to the left, right, up, down, or any diagonal direction.
+4. Return the modified grid with the green pixel moved closer to the yellow pixel."
+ddf7fa4f.png	The task involves changing the color of pixels to grey unless the colored pixel is located in the top row of the grid.	"In the input grid, there are colored pixels scattered across the grid. In the output grid, all these colored pixels have been changed to grey except for the pixels that are located in the top row. The top row retains its colored pixels, while the rest of the pixels that were initially colored are now grey."	"get_pixel_coords: To identify the coordinates of the colored pixels.
+change_object_color: To change the color of the pixels not in the top row to grey."	"1. Use `get_pixel_coords` to get the coordinates of all non-black and non-grey pixels.
+2. Iterate over the list of colored pixel coordinates. For each colored pixel, check if it is not in the top row (row index 0).
+3. If the pixel is not in the top row, change its color to grey using `change_object_color`.
+4. Return the modified grid with the appropriate pixels changed to grey, except for those in the top row."
+de1cd16c.png	"The task is to identify the color that appears the least in the grid, then determine which color surrounds these least frequent pixels the most, and output a single pixel of this most surrounding color."	"The grid is examined to count the pixels of each color. The color with the lowest count is determined, and then the surrounding pixels of this least frequent color are counted by color. The color that most frequently surrounds the least frequent color is identified, and the output is a single pixel of this color."	"get_pixel_coords: To identify all the pixel colors and their coordinates.
+empty_grid and fill_value: To create a new grid or place the single pixel of the resulting color."	"1. Use `get_pixel_coords` to obtain a dictionary of pixel colors and their coordinates.
+2. Count the number of pixels of each color to identify the color that appears the least.
+3. For the least frequent color, examine the surrounding pixels to count the frequency of each surrounding color.
+4. Identify which color surrounds the least frequent color the most.
+5. Create a new grid with a single pixel of the most surrounding color."
+e9afcf9a.png	"The task involves altering columns of a grid by swapping the top and bottom pixels in every other column, starting with the second column from the left."	"For every other column beginning with the second one, the pixel in the topmost position is swapped with the pixel in the bottommost position. This process creates a mirrored effect on the specified columns, altering the vertical arrangement of the colors in those columns while leaving the first and every other subsequent column unchanged."	"get_pixel_coords: To find the coordinates of the pixels in each column.
+change_object_color: To swap the colors of the top and bottom pixels in the selected columns."	"1. Use `get_pixel_coords` to identify the coordinates of pixels in each column.
+2. Iterate over the columns, starting with the second one, and continue with every other column (i.e., columns 2, 4, 6, etc.).
+3. Swap the colors of the top and bottom pixel in each of these columns.
+4. Return the modified grid with the swapped columns."
+e76a88a6.png	The task requires identifying colored squares and filling corresponding grey squares with that color.	"The colored square in each input grid serves as a template for the color that should be used to fill the grey squares in the grid. All grey squares are filled with the color of the identified colored square, transforming the grid into a pattern of colored squares where grey squares previously existed."	"get_pixel_coords: To identify the coordinates of the colored and grey pixels.
+get_object_color: To obtain the color of the colored square.
+change_object_color: To change the color of grey squares to the identified color."	"1. Use `get_pixel_coords` to locate the coordinates of the colored square(s).
+2. Identify the color of the square(s) using `get_object_color`.
+3. Use `get_pixel_coords` again to locate all grey squares.
+4. Fill all grey squares with the identified color from step 2 using `change_object_color`.
+5. Return the grid with the grey squares now filled with the new color."
+e73095fd.png	The task is to identify black shapes that are rectangles and squares within the grid and change their color to yellow.	All the black regions in the grid that form rectangles or squares are changed to yellow. It is observed that the transformation involves filling in these specific shapes with yellow while leaving the rest of the grid unchanged.	"get_pixel_coords: To find all black pixels and their coordinates.
+change_object_color: To change the color of the identified rectangles and squares from black to yellow."	"1. Use `get_pixel_coords` to obtain the coordinates of all black pixels.
+2. Determine which black pixels form part of a rectangle or square.
+3. Change the color of all the pixels that form these black rectangles and squares to yellow using `change_object_color`.
+4. Return the updated grid where all former black rectangles and squares are now yellow."
+e98196ab.png	"The task involves splitting the input grid by a grey line and then combining the two halves, prioritizing colored pixels over black pixels."	"The input is divided along a grey line, resulting in two halves. These halves are then merged such that when one half has a colored pixel at any position, it is preferred over a black pixel at the same position in the other half."	"get_pixel_coords: To identify the coordinates of the grey dividing line.
+crop_grid: To separate the input into two halves at the grey line.
+combine_object: To overlay one half over the other, ensuring colored pixels take precedence over black pixels."	"1. Identify the grey line that divides the input into two halves.
+2. Create a function to overlay one half over the other, giving priority to colored pixels over black pixels.
+3. Merge the halves according to the priority rule to form the output."
+e9614598.png	"The task involves adding a fixed-sized green '+' symbol between two blue pixels in a grid, where the center of the '+' is equidistant from both blue pixels."	"In each grid, two blue pixels are located, and a green '+' made of five pixels is added centrally between them. The '+' sign's central pixel is positioned exactly in the middle of the two blue pixels, with the remaining four pixels of the '+' spreading out vertically and horizontally from this central point."	"get_pixel_coords: To identify the coordinates of the blue pixels.
+fill_value: To fill in the green '+' symbol at the calculated midpoint."	"1. Identify the coordinates of the two blue pixels.
+2. Calculate the midpoint between these two blue pixels.
+3. Plot a green '+' shape at this midpoint, ensuring it is composed of one central pixel and four adjacent pixels (above, below, left, and right of the center)."
